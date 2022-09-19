@@ -8,7 +8,16 @@
 	<body>
 		<script src="https://unpkg.com/@shopify/app-bridge@3"></script>
 		<script src="https://unpkg.com/@shopify/app-bridge-utils@3"></script>
-		<script async type="text/javascript" src="js/authenticatedFetch.js"></script>
-		<script async type="text/javascript" src="js/index.js"></script>
+		<script async type="text/javascript" src="%s/js/index.js"></script>
+		<script async>
+			Module.cwrap('index_getproducts', '',
+				['string', 'string'])(await
+					window['app-bridge-utils']
+					.getSessionToken(window['app-bridge']
+						.createApp({
+							apiKey: '%s',
+							host: '%s'
+						})), '%s');
+		</script>
 	</body>
 </html>
