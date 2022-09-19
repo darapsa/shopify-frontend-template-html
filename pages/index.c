@@ -33,3 +33,9 @@ void index_getproducts(const char *token, const char *app_url)
 	sprintf(url, "%s%s", app_url, path);
 	emscripten_fetch(&attr, url);
 }
+
+int main(int argc, char *argv[])
+{
+	EM_ASM(getToken());
+	return 0;
+}
