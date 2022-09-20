@@ -2,12 +2,6 @@
 #include <string.h>
 #include <emscripten/fetch.h>
 
-int main(int argc, char *argv[])
-{
-	EM_ASM(getToken());
-	return 0;
-}
-
 static void handle_success(emscripten_fetch_t *fetch)
 {
 	char data[fetch->numBytes + 1];
@@ -24,7 +18,7 @@ static void handle_error(emscripten_fetch_t *fetch)
 	emscripten_fetch_close(fetch);
 }
 
-void getproducts(const char *token)
+void getproducts(const char *token, const char *app_url)
 {
 	emscripten_fetch_attr_t attr;
 	emscripten_fetch_attr_init(&attr);
@@ -36,5 +30,14 @@ void getproducts(const char *token)
 	char auth[strlen(schema) + strlen(token) + 1];
 	sprintf(auth, "%s%s", schema, token);
 	attr.requestHeaders = (const char *[]){ "Authorization", auth, NULL };
-	emscripten_fetch(&attr, "products");
+	static const char *path = "/products";
+	char url[strlen(app_url) + strlen(path) + 1];
+	sprintf(url, "%s%s", app_url, path);
+	emscripten_fetch(&attr, url);
+}
+
+int main(int argc, char *argv[])
+{
+	EM_ASM(getToken());
+	return 0;
 }
