@@ -4,8 +4,8 @@
 
 static void handle_success(emscripten_fetch_t *fetch)
 {
-	printf("Finished downloading %llu bytes from URL %s.\n",
-			fetch->numBytes, fetch->url);
+	printf("Finished downloading %llu bytes of %s from URL %s.\n",
+			fetch->numBytes, fetch->data, fetch->url);
 	emscripten_fetch_close(fetch);
 }
 
@@ -16,7 +16,7 @@ static void handle_error(emscripten_fetch_t *fetch)
 	emscripten_fetch_close(fetch);
 }
 
-void index_getproducts(const char *token, const char *app_url)
+void getproducts(const char *token, const char *app_url)
 {
 	emscripten_fetch_attr_t attr;
 	emscripten_fetch_attr_init(&attr);
