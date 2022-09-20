@@ -6,8 +6,8 @@ static void handle_success(emscripten_fetch_t *fetch)
 {
 	char data[fetch->numBytes + 1];
 	strlcpy(data, fetch->data, fetch->numBytes + 1);
-	printf("Finished downloading %llu bytes of %s from URL %s.\n", fetch->numBytes, data,
-			fetch->url);
+	printf("Finished downloading %llu bytes of %s from URL %s.\n",
+			fetch->numBytes, data, fetch->url);
 	emscripten_fetch_close(fetch);
 }
 
