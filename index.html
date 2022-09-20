@@ -8,7 +8,7 @@
 	<body>
 		<script src="https://unpkg.com/@shopify/app-bridge@3"></script>
 		<script src="https://unpkg.com/@shopify/app-bridge-utils@3"></script>
-		<script async>
+		<script>
 			async function getToken() {
 				Module.cwrap('getproducts', '',
 					['string', 'string'])(await
